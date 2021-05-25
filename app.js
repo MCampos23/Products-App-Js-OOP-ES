@@ -30,15 +30,20 @@ class UI {
         if (element.name=='delete'){
             element.parentElement.parentElement.parentElement.remove()
             this.showMessage('Product Deleted Successfully', 'warning')
+            if(document.querySelector('#product-list').childNodes.length == 3){
+                document.querySelector("#list-header").innerHTML="No products added to show. Save some products to display them here"
+            }
         }
     }
     showMessage(message, cssClass) {
         const div = document.createElement('div')
-        div.className= `alert alert-${cssClass} mt-2`
+        div.className= `alert alert-${cssClass} mt-2 col-md-4`
         div.appendChild(document.createTextNode(message))
         const container = document.querySelector('.container')
         const app = document.querySelector('#App')
-        container.insertBefore(div, app)
+        container.appendChild(div)
+        const listHeader = document.querySelector('#list-header')
+        listHeader.innerHTML="Products List"
         setTimeout(function(){
             document.querySelector('.alert').remove()
         }, 3000)

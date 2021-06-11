@@ -18,6 +18,7 @@ class UI {
             <strong>Product price:</strong> ${product.price} $
             <strong>Product year: </strong>${product.year}
             <a name="delete" href="#" class="btn btn-danger m-2">Delete</a>
+            <a name="edit" href="#" class="btn btn-success m-2">Edit</a>
         </div>
        </div>
        `
@@ -33,6 +34,13 @@ class UI {
             if(document.querySelector('#product-list').childNodes.length == 3){
                 document.querySelector("#list-header").innerHTML="No products added to show. Save some products to display them here"
             }
+        }
+    }
+    editProduct(element) {
+        if (element.name=='edit'){
+            console.log(element.parentElement.parentElement.parentElement)
+            this.showMessage('Product Edited Successfully', 'success')
+           
         }
     }
     showMessage(message, cssClass) {
@@ -75,4 +83,5 @@ document.querySelector('#product-form')
 document.querySelector('#product-list').addEventListener('click', function(e){
     const ui = new UI()
     ui.deleteProduct(e.target)
+    ui.editProduct(e.target)
 })

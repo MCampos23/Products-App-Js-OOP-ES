@@ -14,11 +14,10 @@ class UI {
        element.innerHTML = `
        <div class="card text-center mb-4"> 
         <div class="card-body">
-            <strong>Product name: </strong>${product.name}
-            <strong>Product price:</strong> ${product.price} $
-            <strong>Product year: </strong>${product.year}
-            <a name="delete" href="#" class="btn btn-danger m-2">Delete</a>
-            <a name="edit" href="#" class="btn btn-success m-2">Edit</a>
+            <strong>Producto: </strong>${product.name}
+            <strong>Precio:</strong> ${product.price} €
+            <strong>Año: </strong>${product.year}
+            <a name="delete" href="#" class="btn btn-danger m-2">Eliminar</a>
         </div>
        </div>
        `
@@ -28,20 +27,15 @@ class UI {
         document.querySelector('#product-form').reset()
     }
     deleteProduct(element) {
-        if (element.name=='delete'){
+        this.delete = window.confirm("¿Seguro que quieres eliminar el producto?")
+        if (element.name=='delete' && this.delete){
             element.parentElement.parentElement.parentElement.remove()
-            this.showMessage('Product Deleted Successfully', 'warning')
+            this.showMessage('Producto eliminado', 'warning')
             if(document.querySelector('#product-list').childNodes.length == 3){
-                document.querySelector("#list-header").innerHTML="No products added to show. Save some products to display them here"
+                document.querySelector("#list-header").innerHTML="No hay ningún producto para mostrar. Guarda algún producto para que se muestre aquí."
             }
         }
-    }
-    editProduct(element) {
-        if (element.name=='edit'){
-            console.log(element.parentElement.parentElement.parentElement)
-            this.showMessage('Product Edited Successfully', 'success')
-           
-        }
+    
     }
     showMessage(message, cssClass) {
         const div = document.createElement('div')
@@ -70,11 +64,11 @@ document.querySelector('#product-form')
 
     const ui = new UI()
     if(name=="" || price=="" || year==""){
-     return ui.showMessage('Please complete the fields', 'danger')
+     return ui.showMessage('Por favor completa los campos', 'danger')
     }    
     ui.addProduct(product)
     ui.resetForm()
-    ui.showMessage('Product added successfully', 'success')
+    ui.showMessage('Producto guardado', 'success')
 
 
     e.preventDefault()
